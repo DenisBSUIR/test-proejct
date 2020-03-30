@@ -1,3 +1,5 @@
+<#include "security.ftlh">
+
 <#macro navbar fullNavbar>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -24,7 +26,20 @@
                                     <a class="nav-link" href="/responses">Responses</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/">PROFILE</a>
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            ${firstName} ${lastName}
+                                        </button>
+                                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                            <a class="dropdown-item" href="/profileEdit">Edit Profile</a>
+                                            <a class="dropdown-item" href="/changePassword">Change Password</a>
+                                            <a class="dropdown-item" href="/logout">Log Out</a>
+                                            <!--
+                                            <form action="/logout" method="post">
+                                            </form>
+                                            -->
+                                        </div>
+                                    </div>
                                 </li>
                             </ul>
                         <#else>
