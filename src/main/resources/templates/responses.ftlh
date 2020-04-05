@@ -1,16 +1,20 @@
 <#import "parts/common.ftlh" as c>
 
-<@c.page true false>
-    <div>
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <#list fields as field>
-                    <th scope="col">${field.label}</th>
-                </#list>
-            </tr>
-            </thead>
-            <tbody>
+<@c.page true true>
+    <div class="card">
+        <div class="card-header bg-white">
+            <label>Responses</label>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <#list fields as field>
+                        <th scope="col">${field.label}</th>
+                    </#list>
+                </tr>
+                </thead>
+                <tbody>
                 <#list responses as response>
                     <tr>
                         <#list fields as field>
@@ -22,7 +26,8 @@
                         </#list>
                     </tr>
                 </#list>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 </@c.page>

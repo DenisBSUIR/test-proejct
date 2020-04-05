@@ -102,14 +102,20 @@
                 </select>
             </div>
         </div>
+
+        <!-- Options -->
+        <div>
+            <input name="options" type="hidden" value="">
+        </div>
+
         <div class=" container d-flex flex-row">
             <div class="form-group form-check">
                 <div><input name="required" class="form-check-input" type="checkbox" id="check1"></div>
-                <div><label class="form-check-label" for="check">Required</label></div>
+                <div><label class="form-check-label" for="check1">Required</label></div>
             </div>
             <div class="form-group form-check">
                 <div><input name="active" class="form-check-input" type="checkbox" id="check2"></div>
-                <div><label class="form-check-label" for="check">Is Active</label></div>
+                <div><label class="form-check-label" for="check2">Is Active</label></div>
             </div>
         </div>
         <div>
@@ -121,32 +127,38 @@
     <br>
     <br>
 
-
-    <div class="card-body">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th scope="col">Label</th>
-                <th scope="col">Type</th>
-                <th scope="col">Required</th>
-                <th scope="col">Is Active</th>
-                <th scope="col"></th>
-            </tr>
-            </thead>
-            <tbody>
-                <#list fields as field>
+    <div class="card">
+        <div class="card-header bg-white">
+            <div>
+                <label>Fields</label>
+            </div>
+        </div>
+        <div class="card-body">
+            <table class="table table-striped">
+                <thead>
                 <tr>
-                    <td>${field.label}</td>
-                    <td>${field.type}</td>
-                    <td><#if field.required>True<#else>False</#if></td>
-                    <td><#if field.active>True<#else>False</#if></td>
-                    <td></td>
+                    <th scope="col">Label</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Required</th>
+                    <th scope="col">Is Active</th>
+                    <th scope="col"></th>
                 </tr>
+                </thead>
+                <tbody>
+                <#list fields as field>
+                    <tr>
+                        <td>${field.label}</td>
+                        <td>${field.type}</td>
+                        <td><#if field.required>True<#else>False</#if></td>
+                        <td><#if field.active>True<#else>False</#if></td>
+                        <td></td>
+                    </tr>
+                <#else>No fields
                 </#list>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
-
 
 </div>
 </@c.page>

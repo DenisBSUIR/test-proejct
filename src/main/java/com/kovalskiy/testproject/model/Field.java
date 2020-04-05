@@ -1,6 +1,8 @@
 package com.kovalskiy.testproject.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "fields")
@@ -17,14 +19,26 @@ public class Field {
     private boolean isActive;
 
 
-    public Field(String label, Type type, boolean isRequired, boolean isActive) {
+    @CollectionTable(name = "options", joinColumns = @JoinColumn(name = "field_id"))
+    private HashSet<String> options = new HashSet<>();
+
+    public Field() {}
+
+    public Field(String label, Type type, boolean isRequired, boolean isActive, HashSet<String> options) {
         this.label = label;
         this.type = type;
         this.isRequired = isRequired;
         this.isActive = isActive;
+        this.options = options;
     }
 
-    public Field() {}
+    public HashSet<String> getOptions() {
+        return options;
+    }
+
+    public void setOptions(HashSet<String> options) {
+        this.options = options;
+    }
 
     public Long getId() {
         return id;

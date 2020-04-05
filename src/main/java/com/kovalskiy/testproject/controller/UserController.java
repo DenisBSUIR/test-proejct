@@ -23,6 +23,11 @@ public class UserController {
         return "profileEdit";
     }
 
+    @GetMapping("/passwordChange")
+    public String showPasswordChangePage(Model model) {
+        return "/passwordChange";
+    }
+
     @PostMapping("/changeProfile")
     public String saveChanges(@AuthenticationPrincipal User user,
                               @RequestParam String firstName,
@@ -40,4 +45,21 @@ public class UserController {
 
         return "redirect:/fields";
     }
+
+    @PostMapping("/saveNewPassword")
+    public String saveNewPassword(@AuthenticationPrincipal User user,
+                                  @RequestParam String currentPassword,
+                                  @RequestParam String newPassword,
+                                  @RequestParam String confirm) {
+
+        if(user.getPassword().equals(currentPassword)) {
+            if(newPassword.equals(confirm)) {
+                user.setPassword(newPassword);
+                userRepository.save(user);
+            }
+        }
+
+        return "redirect:/fields";
+    }
+
 }
