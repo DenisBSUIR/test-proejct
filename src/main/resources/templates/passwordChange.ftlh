@@ -8,6 +8,9 @@
                     <label>Change Password</label>
                 </div>
                 <div class="card-body">
+                    <#if error??>
+                        <label>${error}</label>
+                    </#if>
                     <div class="form-group">
                         <label for="current">Current Password</label>
                         <input class="form-control" name="currentPassword" type="password" id="current">
@@ -19,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <label for="conf">Confirm New Password</label>
-                        <input class="form-group" name="confirm" type="password" id="conf">
+                        <input class="form-control" name="password2" type="password" id="conf">
                     </div>
                     <div class="container">
                         <button class="btn btn-primary" type="submit">CHANGE</button>

@@ -25,7 +25,6 @@ public class FieldsController {
     public String showFieldsPage(Model model) {
         Iterable<Field> fields = fieldsRepository.findAll();
         model.addAttribute("fields", fields);
-
         return "/fields";
     }
 

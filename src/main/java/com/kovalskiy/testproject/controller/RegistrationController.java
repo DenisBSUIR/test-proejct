@@ -4,17 +4,19 @@ import com.kovalskiy.testproject.model.User;
 import com.kovalskiy.testproject.repository.UserRepository;
 import com.kovalskiy.testproject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import javax.validation.Valid;
+import java.util.Map;
+
 @Controller
 public class RegistrationController {
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private UserService userService;
@@ -25,22 +27,27 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String registry(User user, Model model) {
+    public String registry(@Valid User user,
+                           BindingResult bindingResult,
+                           Model model) {
 
-        /*User userFromDB = userRepository.findByEmail(user.getEmail());
-        if(userFromDB != null) {
-            model.addAttribute("message", "User exists!");
+        if(bindingResult.hasErrors()) {
+            Map<String, String> errorsMap = ControllerUtil.getErrors(bindingResult);
+            model.mergeAttributes(errorsMap);
+            model.addAttribute("usr", user);
             return "registration";
-        }*/
+        } else {
+            if(user.getPassword()!= null && !user.getPassword().equals(user.getPassword2())) {
+                model.addAttribute("usr", user);
+                model.addAttribute("passwordError", "Passwords are different");
+                return "registration";
+            }
 
-        if(!StringUtils.isEmpty(user.getEmail())) {
-            System.out.println("E");
-            userService.send(user.getEmail(), "Activation", "message");
+            if(!userService.addUser(user)) {
+                model.addAttribute("message", "User exists!");
+                return "registration";
+            }
         }
-
-        System.out.println("W");
-
-        userRepository.save(user);
         return "redirect:/login";
     }
 }
