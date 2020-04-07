@@ -35,6 +35,17 @@ public class FieldsController {
 
     @PostMapping("/addField")
     public String addField(Field field, Model model) {
+        HashSet<String> temp = new HashSet<>(field.getOptions());
+        field.getOptions().clear();
+        for (String s: temp) {
+            String[] options = s.split("\n");
+            for(String option: options) {
+                if (option != null && option != "") {
+                    field.getOptions().add(option);
+                }
+            }
+        }
+
         fieldsRepository.save(field);
         return "redirect:/fields";
     }

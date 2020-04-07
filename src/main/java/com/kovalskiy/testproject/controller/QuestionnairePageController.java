@@ -28,6 +28,7 @@ public class QuestionnairePageController {
     public String showQuestionnairePage(Model model) {
 
         List<Field> fields = fieldsRepository.findAll();
+
         model.addAttribute("fields", fields);
         return "questionnaire";
     }
@@ -45,6 +46,7 @@ public class QuestionnairePageController {
                 resp.getFieldResponse().put(f.getId(),"");
             }
         }
+
         responseRepository.save(resp);
 
         return "redirect:/confirmation";

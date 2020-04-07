@@ -20,7 +20,15 @@
                                 </div>
                             <#elseif field.type.name() == "RADIO_BUTTON">
                                 <div>
-
+                                    <label for="radioButtonField">${field.label}</label>
+                                    <div id="radiobuttonField">
+                                        <#list field.options as option>
+                                            <div class="form-check">
+                                                <input class="form-check-input" type="radio" name="${field.label}" id="radioButton${option?index}" value="${option}" <#if option?index == 0>checked</#if>>
+                                                <label class="form-check-label" for="radioButton${option?index}">${option}</label>
+                                            </div>
+                                        </#list>
+                                    </div>
                                 </div>
                             <#elseif field.type.name() == "CHECKBOX">
                                 <div class="form-group form-check">
@@ -28,8 +36,13 @@
                                     <label class="form-check-label" for="check">${field.label}</label>
                                 </div>
                             <#elseif field.type.name() == "COMBOBOX">
-                                <div>
-
+                                <div class="form-group">
+                                    <label for="selector"></label>
+                                    <select name="${field.label}" class="custom-select" id="selector">
+                                        <#list field.options as option>
+                                            <option <#if option?index == 0>selected</#if> value="${option}">${option}</option>
+                                        </#list>
+                                    </select>
                                 </div>
                             <#elseif field.type.name() == "DATE">
                                 <div class="form-group">

@@ -18,7 +18,6 @@ public class Field {
     private boolean isRequired;
     private boolean isActive;
 
-
     @CollectionTable(name = "options", joinColumns = @JoinColumn(name = "field_id"))
     private HashSet<String> options = new HashSet<>();
 
