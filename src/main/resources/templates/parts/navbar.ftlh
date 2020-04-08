@@ -3,8 +3,9 @@
 <#macro navbar fullNavbar>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container d-flex flex-row ">
-                <div class="navbar-brand">
-                    <div>LOGOTYPE</div>
+                <div class="navbar-brand d-flex row">
+                    <h2 class="text-dark">LOGO</h2>
+                    <h2 class="text-primary">TYPE</h2>
                 </div>
 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"

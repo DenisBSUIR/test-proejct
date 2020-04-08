@@ -27,7 +27,9 @@ public class QuestionnairePageController {
     @GetMapping("/")
     public String showQuestionnairePage(Model model) {
 
-        List<Field> fields = fieldsRepository.findAll();
+        //List<Field> fields = fieldsRepository.findAll();
+
+        List<Field> fields = fieldsRepository.findByIsActive(true);
 
         model.addAttribute("fields", fields);
         return "questionnaire";
@@ -35,7 +37,8 @@ public class QuestionnairePageController {
 
     @PostMapping("/response")
     public String saveResponse(@RequestParam Map<String, String> allParams, Model model) {
-        List<Field> fields = fieldsRepository.findAll();
+        List<Field> fields = fieldsRepository.findByIsActive(true);
+
         Response resp = new Response();
 
         for(Field f : fields) {
